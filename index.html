@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kilometer Scroll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            /* overflow-y: scroll; */
+            height: 400em; /* De hoogte van de pagina is 400em om te kunnen scrollen */
+            display: flex;
+            justify-content: center; /* Centreert de inhoud horizontaal */
+            align-items: center; /* Centreert de inhoud verticaal */
+            background-image: url("https://www.shutterstock.com/image-illustration/textured-soccer-game-field-neon-260nw-2323875643.jpg");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: bottom;
+        }
+
+        #km-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centreert het element in het midden */
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #km-count, #bar-value {
+            color: #333;
+            margin: 0 20px; /* Zet wat ruimte tussen de kilometer- en bar waarde */
+        }
+
+        /* Style voor de slider */
+        #bar-slider-container {
+            position: fixed;
+            top: 80%; /* Zet de slider iets onder het midden van het scherm */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            text-align: center;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="km-display">
+        <p id="km-count">400 KM</p>
+        <p id="bar-value">0.0 Bar</p> <!-- Start de barwaarde op 0.0 -->
+    </div>
+
+    <div id="bar-slider-container">
+        <input type="range" id="bar-slider" min="0" max="20" value="0" step="0.1"> <!-- Start de slider op 0 -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let kmDisplay = document.getElementById("km-count");
+            let barSlider = document.getElementById("bar-slider");
+            let barValue = document.getElementById("bar-value");
+            let maxKm = 400; // Maximaal aantal kilometers
+            let currentKm = maxKm;
+
+            // Functie om de kilometers bij te werken op basis van de scrollpositie
+            function updateKm() {
+                // Bepaal de scrollpositie en reken aflopend aantal kilometers uit
+                let scrollPosition = window.scrollY;
+                // Gebruik de scrollpositie om het aantal kilometers te berekenen
+                currentKm = Math.max(maxKm - Math.floor(scrollPosition / 13.68), 0);
+                kmDisplay.textContent = currentKm + " KM";
+            }
+
+            // Zet de scrollpositie bij het laden op de onderkant van de pagina
+            window.scrollTo(0, document.body.scrollHeight);
+
+            // Update de kilometerstand meteen bij de eerste laadsessie
+            updateKm();
+
+            // Event listener voor scrollen
+            window.addEventListener("scroll", updateKm);
+
+            // Functie om de bar waarde bij te werken op basis van de slider
+            barSlider.addEventListener("input", function() {
+                let bar = (barSlider.value / 10).toFixed(1); // Bereken de barwaarde
+                barValue.textContent = bar + " Bar"; // Toon de waarde van de bar slider
+                kmDisplay.textContent = currentKm + " KM"; // Werk de kilometerstand bij
+            });
+        });
+    </script>
+</body>
+</html>
