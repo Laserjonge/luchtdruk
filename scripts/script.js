@@ -1,70 +1,59 @@
-// Verkrijg het display element
+// Verkrijg het display-element
 const display = document.getElementById("display");
 
 // Verkrijg alle lijstitems
 const items = document.querySelectorAll("ol li");
 
-// De getallen uit je lijst (zonder eenheden)
+// De waarden van de markers (zonder eenheden)
 const values = [400, 106, 39, 11, 9, 6, 1, 0.8, 0.3, 0.07, 0];
 
-// Functie om het lineaire getal tussen twee waarden te berekenen
-function interpolate(value1, value2, scrollRatio) {
-    return value1 + (value2 - value1) * scrollRatio;
-}
-
-// Functie om de getallen te converteren naar de juiste eenheden
-function formatValue(value) {
-    if (value >= 1) {
-        // Voor waarden groter dan 1 km, toon in KM
-        return Math.round(value) + " KM";
-    } else if (value >= 0.001) {
-        // Voor waarden tussen 1 m en 1 km, toon in meters
-        return Math.round(value * 1000) + " M";
-    } else {
-        // Voor waarden kleiner dan 0.001 km, toon in meters
-        return Math.round(value * 1000) + " M";
-    }
-}
-
-// Functie om het display bij te werken
+// Functie om de waarde op basis van scrollpositie te berekenen
 function updateDisplay() {
-    const scrollPosition = window.scrollY + window.innerHeight / 2; // Middel van het scherm
-    let startValue, endValue;
-    let startTop, endTop;
+    const scrollY = window.scrollY + window.innerHeight / 2; // Midden van het scherm
+    let displayValue = 400; // Standaardwaarde is 400 KM
 
-    // Controleer of de scrollpositie boven of onder het bereik van de lineaal ligt
-    if (scrollPosition <= items[0].offsetTop) {
-        // Als de scrollpositie boven 400 km ligt
-        display.textContent = formatValue(values[0]);
-        return;
-    } else if (scrollPosition >= items[items.length - 1].offsetTop) {
-        // Als de scrollpositie onder 0 ligt
-        display.textContent = formatValue(values[values.length - 1]);
-        return;
-    }
-
-    // Zoek de twee getallen waarvan de scrollpositie tussenin ligt
+    // Loop door alle markers
     for (let i = 0; i < items.length - 1; i++) {
-        startTop = items[i].offsetTop + items[i].offsetHeight / 2;
-        endTop = items[i + 1].offsetTop + items[i + 1].offsetHeight / 2;
+        const startTop = items[i].offsetTop;
+        const endTop = items[i + 1].offsetTop;
 
-        if (scrollPosition >= startTop && scrollPosition < endTop) {
-            startValue = values[i];
-            endValue = values[i + 1];
-            const scrollRatio = (scrollPosition - startTop) / (endTop - startTop);
-
-            // Bereken het lineaire getal tussen startValue en endValue
-            const interpolatedValue = interpolate(startValue, endValue, scrollRatio);
-
-            // Werk het display bij met de geformatteerde waarde
-            display.textContent = formatValue(interpolatedValue);
+        if (scrollY >= startTop && scrollY < endTop) {
+            const ratio = (scrollY - startTop) / (endTop - startTop);
+            displayValue = values[i] + (values[i + 1] - values[i]) * ratio;
             break;
         }
     }
+
+    // Check of we boven of onder de markers zitten
+    if (scrollY < items[0].offsetTop) {
+        displayValue = values[0]; // Eerste waarde (400 KM)
+    } else if (scrollY >= items[items.length - 1].offsetTop) {
+        displayValue = 0; // Laatste waarde is altijd 0
+    }
+
+    // Werk het display bij
+    display.textContent = formatValue(displayValue);
 }
 
-// Update de display bij elke scrollbeweging
+// Functie om een waarde te formatteren
+function formatValue(value) {
+    if (value >= 1) {
+        return Math.round(value) + " KM";
+    } else if (value >= 0.001) {
+        return Math.round(value * 1000) + " M";
+    } else {
+        return "0"; // Altijd 0 voor waarden onder 1 meter
+    }
+}
+
+// Eventlistener om het display bij elke scroll te updaten
 window.addEventListener("scroll", updateDisplay);
 
-// Zorg ervoor dat de display onmiddellijk wordt bijgewerkt bij het laden van de pagina
+// Scroll de pagina direct naar de onderkant bij het laden
+window.onload = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+    updateDisplay(); // Zorg ervoor dat het display direct goed wordt bijgewerkt
+};
+
+// Initialiseer bij het laden van de pagina
 updateDisplay();
