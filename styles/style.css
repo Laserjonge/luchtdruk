@@ -1,0 +1,70 @@
+/* Gradient achtergrond van de pagina */
+body {
+    background: linear-gradient(#e66465, #9198e5);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 600vh;
+}
+
+/* Lineaal aan de linkerkant */
+ol {
+    background-color: brown;
+    width: 6em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    height: 600vh;
+}
+
+/* Stijl voor de lijstitems */
+li {
+    color: white; /* Witte tekst */
+    font-size: 1.5rem;
+    position: absolute;
+}
+
+/* Plaatsing van de lijstitems */
+li:nth-of-type(1) { top: 50vh;  /* 400 KM op 50vh */ }
+li:nth-of-type(2) { top: 100vh; /* 106 KM op 100vh */ }
+li:nth-of-type(3) { top: 150vh; /* 39 KM op 150vh */ }
+li:nth-of-type(4) { top: 200vh; /* 11 KM op 200vh */ }
+li:nth-of-type(5) { top: 250vh; /* 9 KM op 250vh */ }
+li:nth-of-type(6) { top: 300vh; /* 6 KM op 300vh */ }
+li:nth-of-type(7) { top: 350vh; /* 1 KM op 350vh */ }
+li:nth-of-type(8) { top: 400vh; /* 800 M op 400vh */ }
+li:nth-of-type(9) { top: 450vh; /* 300 M op 450vh */ }
+li:nth-of-type(10) { top: 500vh; /* 70 M op 500vh */ }
+li:nth-of-type(11) { top: 550vh; /* 0 op 550vh */ }
+
+/* Verwijder de bolletjes van de lijst */
+ol, li {
+    list-style-type: none;
+}
+
+/* Display voor het getal aan de linkerkant */
+#display {
+    position: fixed;
+    left: 10px;
+    top: 50vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    font-size: 2rem;
+    border-radius: 5px;
+}
+
+/* Styling voor de afbeeldingdivs */
+.image-div {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.image-div img {
+    width: 200vw;
+    max-width: 400px;
+    height: auto;
+}
+
