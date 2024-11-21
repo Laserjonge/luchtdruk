@@ -1,15 +1,29 @@
 /* Gradient achtergrond van de pagina */
 body {
-    background: linear-gradient(#e66465, #9198e5);
+    background: black;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 600vh;
+    display: flex;
+    justify-content: center;
+}
+
+#background img{
+    filter: blur(1px);
+    height: 600vh;
+    margin-left: 5%;
 }
 
 /* Lineaal aan de linkerkant */
 ol {
-    background-color: brown;
+    background: repeating-linear-gradient(
+        to bottom,         /* De richting van de streepjes (verticaal) */
+        black,             /* Zwart streepje */
+        black 2px,         /* Einde van het zwarte streepje (2px breed) */
+        #F4D918 2px,       /* Geel begint hier */
+        #F4D918 10px       /* Geel eindigt hier (8px breed) */
+    );
     width: 6em;
     position: absolute;
     left: 0;
@@ -17,13 +31,33 @@ ol {
     margin: 0;
     padding: 0;
     height: 600vh;
+    border-left: #F4D918 solid 4px;
+    border-right: #F4D918 solid 4px; filter: brightness(90%);
 }
+
+
+
+ol::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: black; /* Verticale lijn */
+}
+
+
 
 /* Stijl voor de lijstitems */
 li {
-    color: white; /* Witte tekst */
-    font-size: 1.5rem;
+    color: black; /* Witte tekst */
+    font-size: 1.2rem;
     position: absolute;
+    font-family: sans-serif;
+    font-weight: 400;
+    background-color: #F4D918;
+    padding: 6px 8px 6px 4px;
 }
 
 /* Plaatsing van de lijstitems */
@@ -47,13 +81,18 @@ ol, li {
 /* Display voor het getal aan de linkerkant */
 #display {
     position: fixed;
-    left: 10px;
-    top: 50vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    left: -4px;
+    top: 50%;
+    background-color: red;
     color: white;
     padding: 10px;
     font-size: 2rem;
     border-radius: 5px;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 1.4em;
+    width: 4.1em;
+    text-align: center;
 }
 
 /* Styling voor de afbeeldingdivs */
@@ -66,5 +105,225 @@ ol, li {
     width: 200vw;
     max-width: 400px;
     height: auto;
+}
+
+/* Stijl voor de slider */
+#ball-pressure-slider {
+    width: 200px;
+}
+
+
+/* Animatie voor draaiende pijlen */
+@keyframes rotateAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(240deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Eerste pijl draait automatisch */
+#first-rotate {
+    animation: rotateAnimation 5s ease-in-out infinite;
+}
+
+/* Tweede pijl begint gepauzeerd */
+#second-rotate {
+    animation: rotateAnimation 5s ease-in-out infinite;
+    animation-play-state: paused;
+}
+
+.image-wrapper {
+    position: fixed; /* Onderin het scherm */
+    bottom: -80px;    /* Vanaf de onderkant */
+    left: 44%;        /* Midden van het scherm */
+    transform: translateX(-50%); /* Precies centreren */
+    display: flex;     /* Flexbox om meters naast elkaar te plaatsen */
+    gap: 0px;         /* Ruimte tussen de meters */
+    z-index: 100;      /* Zorg ervoor dat dit bovenop andere elementen ligt */
+    justify-content: center; /* Zorg dat de elementen in het midden staan */
+}
+
+.meter-container {
+    position: relative; /* Container voor de meter en pijl */
+    width: 200px;       /* Vergroot de afmetingen */
+    height: 400px;      /* Houd rekening met grotere afbeeldingen */
+}
+
+.meter-image {
+    position: absolute; /* Zorg dat de meter volledig in de container blijft */
+    top: 0;             /* Start bovenin */
+    left: 0;
+    width: 100%;        /* Vul de container volledig */
+    height: 100%;
+}
+
+.meter-pointer {
+    position: absolute; /* Zorg dat de pijl exact bovenop de meter komt */
+    top: 0;             /* Precies uitlijnen met de meter */
+    left: 0;
+    width: 100%;        /* Zelfde afmetingen als de meter */
+    height: 100%;
+    pointer-events: none; /* Zorg dat klikken alleen op de meter werkt */
+    z-index: 2;
+}
+
+.emergency-image {
+    position: absolute; /* Zorg dat de emergency afbeelding absoluut gepositioneerd is */
+    top: 28%;            /* Zorg ervoor dat het bovenop komt */
+    left: 94%;
+    width: 40%;          /* Vul de container volledig */
+    height: 40%;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Lichte schaduw */
+}
+
+
+/* Stijl voor het nieuwe baldrukdisplay */
+#ball-pressure-new-display {
+    position: fixed;
+    left: 10px;
+    top: calc(50vh + 140px); /* Plaats het onder de andere displays */
+    color: white;
+    padding: 10px;
+    font-size: 2rem;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+
+/* Stijlen voor de afbeelding in het midden */
+#center-image-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#center-image-container img {
+    width: 16em;
+    height: 16em;
+}
+
+
+/* Zorg ervoor dat de meter-container absoluut is gepositioneerd */
+.meter-container {
+    position: relative; /* Dit maakt het mogelijk om absoluut gepositioneerde elementen binnen deze container te plaatsen */
+    width: 200px;
+    height: 400px;
+}
+
+/* Absolute positionering voor de drukweergave binnen de container */
+#pressure-display {
+    position: absolute; /* Plaats het absoluut binnen de meter-container */
+    top: 59%;  /* Zet het verticaal in het midden */
+    left: 50%; /* Zet het horizontaal in het midden */
+    transform: translate(-50%, -50%); /* Precisie centreren, zowel verticaal als horizontaal */
+    color: white;
+    padding: 10px;
+    font-size: 1rem; /* Pas de grootte aan indien nodig */
+    border-radius: 5px;
+    z-index: 1; /* Zorg ervoor dat het boven de meter wordt weergegeven */
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: center;
+}
+
+
+/* Zorg ervoor dat de meter-container absoluut is gepositioneerd */
+.meter-container {
+    position: relative; /* Dit maakt het mogelijk om absoluut gepositioneerde elementen binnen deze container te plaatsen */
+    width: 200px;
+    height: 400px;
+}
+
+/* Absolute positionering voor het ball-pressure display binnen de container */
+#ball-pressure-display {
+    position: absolute; /* Plaats het absoluut binnen de meter-container */
+    top: 58%;  /* Zet het verticaal in het midden */
+    left: 50%; /* Zet het horizontaal in het midden */
+    transform: translate(-50%, -50%); /* Precisie centreren, zowel verticaal als horizontaal */
+    color: white;
+    padding: 10px;
+    font-size: 1.1rem; /* Pas de grootte aan indien nodig */
+    border-radius: 5px;
+    z-index: 10; /* Zorg ervoor dat het boven de meter wordt weergegeven */
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: center;
+}
+
+
+.display-non {
+    display: none; /* Verberg deze aanvankelijk */
+}
+
+
+#overlay {
+    position: fixed;           /* Zorgt ervoor dat de overlay het hele scherm bedekt */
+    top: 0;
+    left: 0;
+    width: 100%;               /* Overlay vult het volledige scherm */
+    height: 100%;              /* Overlay vult het volledige scherm */
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 44%, rgba(0,0,0,0) 87%, rgba(0,0,0,0.3562018557422969) 100%);
+    z-index: 1;                /* Zorgt ervoor dat de overlay boven andere elementen komt */
+    pointer-events: none;      /* Zorgt ervoor dat de overlay geen interactie blokkeert */
+}
+
+
+
+#center-image-container {
+    position: fixed; /* Of relative, afhankelijk van je layout */
+    top: 30%; /* Begin in het midden van het scherm */
+    left: 41%;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+}
+
+#center-image-container {
+    overflow: visible; /* Zorg dat het element zichtbaar blijft */
+}
+
+body {
+    overflow: hidden; 
+}
+
+
+
+/* Algemene styling voor hover-elementen */
+.hover1, .hover2, .hover3 {
+    position: relative;  /* Houdt de elementen in hun eigen plaats */
+    display: inline-block;  /* Zorg ervoor dat de afbeeldingen zich gedragen als inline-block elementen */
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: fixed;  /* Zorg ervoor dat de tooltip altijd op dezelfde plaats verschijnt ten opzichte van het scherm */
+    background-color: rgba(0, 0, 0, 0.8);  /* Achtergrondkleur van de tooltip */
+    color: #fff;  /* Witte tekstkleur */
+    padding: 8px 15px;  /* Ruimte rondom de tekst */
+    border-radius: 5px;  /* Afgeronde hoeken */
+    z-index: 9999;  /* Zorg ervoor dat de tooltip boven andere elementen verschijnt */
+    visibility: hidden;  /* Tooltip is standaard verborgen */
+    opacity: 0;  /* Tooltip is transparant wanneer niet zichtbaar */
+    transition: opacity 0.3s ease;  /* Fijne overgang van zichtbaarheid */
+    font-family: sans-serif;
+}
+
+/* Tooltip wordt zichtbaar bij hover */
+.hover1:hover + .tooltip, .hover2:hover + .tooltip, .hover3:hover + .tooltip {
+    visibility: visible;  /* Maak de tooltip zichtbaar bij hover */
+    opacity: 1;  /* Maak de tooltip volledig zichtbaar */
+}
+
+/* Zorg ervoor dat de tooltip bij de cursor verschijnt */
+.tooltip-position {
+    position: fixed;
+    pointer-events: none; /* Zorg ervoor dat de tooltip geen interactie blokkeert */
 }
 

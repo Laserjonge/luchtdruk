@@ -3,42 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lineaal met Gradient Achtergrond</title>
-    <link rel="stylesheet" href="./styles/style.css"> <!-- Verbindt de CSS -->
+    <title>Hoe werkt luchtdruk?</title>
+    <!-- Link naar favicon -->
+    <link rel="icon" type="image/png" href="images/ball-favicon.png">
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
 
-    <!-- Lineaal met afstanden -->
+    <div id="background">
+        <img src="images/background.png" alt="">
+    </div>
+
+    <div id="overlay"></div>
+
     <ol>
-        <li>400 KM</li>
-        <li>106 KM</li>
-        <li>39 KM</li>
-        <li>11 KM</li>
-        <li>9 KM</li>
-        <li>6 KM</li>
-        <li>1 KM</li>
-        <li>800 M</li>
-        <li>300 M</li>
-        <li>70 M</li>
-        <li>0</li>
+        <li>400 KM</li><li>106 KM</li><li>39 KM</li><li>11 KM</li><li>9 KM</li>
+        <li>6 KM</li><li>1 KM</li><li>800 M</li><li>300 M</li><li>70 M</li><li>0</li>
     </ol>
-
-    <!-- Display voor het getal -->
     <div id="display">400 KM</div>
+    
+    <div class="image-wrapper">
+        <!-- Eerste meter -->
+        <div class="meter-container">
+            <img src="images/hoogte-meter.svg" alt="Barometer meet omgevingsdruk" class="meter-image hover1">
+            <img src="images/hoogte-meter-pijl.svg" alt="pijl 1" class="meter-pointer" id="first-rotate">
+            <div id="pressure-display" class="display-non">1.013 Bar</div>
+        </div>
+    
+        <!-- Tweede meter -->
+        <div class="meter-container">
+            <img src="images/druk-meter.svg" alt="Manometer meet de druk in de bal" class="meter-image hover2">
+            <img src="images/druk-meter-pijl.svg" alt="pijl 2" class="meter-pointer" id="second-rotate">
+            <div id="ball-pressure-display" class="display-non">0.0 Bar</div>
+        </div>
+    
+        <!-- Derde afbeelding -->
+        <div class="image-container">
+            <img src="images/noodknop-04.svg" alt="emergency" class="emergency-image">
+        </div>
+    </div>
+    
+        
+        <!-- Derde afbeelding -->
+        <div class="image-container" class="meter-image" alt="hover3">
+            <img src="images/noodknop-04.svg" alt="emergency" class="emergency-image">
+        </div>
+    </div>
+    
 
-    <!-- Afbeeldingen -->
-    <div class="image-div" style="top: 50vh; left: 50%;"><img src="https://www.mecabricks.com/image/1w2rVWbV28W.png" alt="Image 1"></div>
-    <div class="image-div" style="top: 100vh; left: 60%;"><img src="https://i.pinimg.com/736x/52/34/85/52348516ebe43212bd121e61ead10067.jpg" alt="Image 2"></div>
-    <div class="image-div" style="top: 150vh; left: 40%;"><img src="https://bouwsteentjes.info/wp-content/uploads/2020/05/LEGO-Ideas-Blue-Origin-New-Glenn-Rocket-2.jpg" alt="Image 3"></div>
-    <div class="image-div" style="top: 200vh; left: 50%;"><img src="https://www.lego.com/cdn/cs/set/assets/bltf0c009a044463b48/30669_Prod.png" alt="Image 4"></div>
-    <div class="image-div" style="top: 250vh; left: 30%;"><img src="https://64.media.tumblr.com/e88a8409703b8a950e19a897704f8571/tumblr_peluf1smPy1vrgsx5o1_1280.jpg" alt="Image 5"></div>
-    <div class="image-div" style="top: 300vh; left: 70%;"><img src="https://www.lego.com/cdn/cs/set/assets/blt034769d55c533a42/30327.png" alt="Image 6"></div>
-    <div class="image-div" style="top: 350vh; left: 50%;"><img src="https://cdn.kiobi.com/images/brickwatch/sets/41252.png" alt="Image 7"></div>
-    <div class="image-div" style="top: 400vh; left: 40%;"><img src="https://www.lego.com/cdn/cs/set/assets/blt85dcd5ef21c7ea39/21055_alt2.png" alt="Image 8"></div>
-    <div class="image-div" style="top: 450vh; left: 60%;"><img src="https://www.lego.com/cdn/cs/set/assets/blt0e2b04c977a2dc2a/10307.png" alt="Image 9"></div>
-    <div class="image-div" style="top: 500vh; left: 50%;"><img src="https://cdn.merlinsbricks.com/images/LEGO-10299/LEGO-10299-2.webp?v=4" alt="Image 10"></div>
-    <div class="image-div" style="top: 550vh; left: 50%;"><img src="https://www.lego.com/cdn/cs/set/assets/bltf2a3ea25d5fcb718/11023.png" alt="Image 11"></div>
+    <!-- Afbeelding in het midden van het scherm -->
+    <div id="center-image-container">
+        <img src="images/Bal_transparant.png" alt="Midden afbeelding">
+    </div>
 
-    <script src="./scripts/script.js"></script> <!-- Verbindt de JavaScript -->
+    <script src="./scripts/script.js"></script>
 </body>
 </html>
