@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoe werkt luchtdruk?</title>
+    <title>Zero State Slider</title>
     <!-- Link naar favicon -->
     <link rel="icon" type="image/png" href="images/ball-favicon.png">
     <link rel="stylesheet" href="./styles/style.css">
@@ -57,6 +57,90 @@
     <!-- Help-knop -->
     <a href="index.html" class="help-btn" title="Ga naar zero-state pagina">?</a>
 
+    <div class="zero-body">
+      <!-- De overlay -->
+      <div id="overlay-zero"></div>
+    
+      <!-- Slider container -->
+      <div id="slider-container">
+        <div id="text-container">
+          Hoe werkt luchtdruk?
+        </div>
+    
+        <!-- Button container (voor 'Nu spelen') -->
+        <div id="button-container">
+          <button id="play-button" style="display: none;" onclick="window.location.href = 'game.html';">Nu spelen!</button>
+        </div>
+      </div>
+    
+      <!-- Pijltjes voor navigatie -->
+      <span class="arrow arrow-left" id="prev-arrow">&lt;</span>
+      <span class="arrow arrow-right" id="next-arrow">&gt;</span>
+    
+      <script>
+        // De teksten voor de slider
+        const texts = [
+          "Hoe werkt luchtdruk?",
+          "Op aarde is de luchtdruk 1.013 bar. Als je de lucht in gaat wordt het steeds minder tot je in de ruimte bent, hier is de luchtdruk namelijk 0.",
+          "In het voorbeeld is een voetbal te zien. Deze bal heeft ook een bepaalde druk die je in eerste instantie kunt bepalen door de bal op te pompen.",
+          "Als je de voetbal vervolgens mee omhoog neemt zal er een verschil in druk ontstaan. Dit komt omdat deze lucht in een dichte bal zit. In de hoogte is de omgevingsdruk lager waardoor de 'hogere' druk op de bal, naar buiten wilt.",
+          "Het gevolg is in het voorbeeld te zien...",
+          "Gebruik de computermuis om de bewegende meters op het juiste moment te stoppen. Heb je het goed gedaan en zit je nog onder de 5.0 bar dan zal de bal intact blijven. Ga je over de limiet van de bal dan loopt het helaas minder goed af :(",
+          "Het doel is om zo hoog mogelijk de lucht in te gaan zonder de voetbal kapot te maken. Door op reset te drukken kan je het zo vaak proberen als je wilt, veel succes!"
+        ];
+    
+        let currentTextIndex = 0;
+    
+        // DOM elementen
+        const textContainer = document.getElementById("text-container");
+        const playButton = document.getElementById("play-button");
+        const prevArrow = document.getElementById("prev-arrow");
+        const nextArrow = document.getElementById("next-arrow");
+    
+        // Functie om de tekst en knoppen bij te werken
+        function updateText() {
+          textContainer.textContent = texts[currentTextIndex];
+    
+          // Toon de "Nu spelen!" knop
+          playButton.style.display = "inline-block";
+    
+          // Update de pijltjes
+          prevArrow.classList.toggle("disabled", currentTextIndex === 0);
+          nextArrow.classList.toggle("disabled", currentTextIndex === texts.length - 1);
+        }
+    
+        // Navigatie via pijltjes
+        prevArrow.addEventListener("click", () => {
+          if (currentTextIndex > 0) {
+            currentTextIndex--;
+            updateText();
+          }
+        });
+    
+        nextArrow.addEventListener("click", () => {
+          if (currentTextIndex < texts.length - 1) {
+            currentTextIndex++;
+            updateText();
+          }
+        });
+    
+        // Klikfunctie voor de volledige pagina (behalve de knoppen)
+        document.body.addEventListener("click", (e) => {
+          if (e.target !== playButton && !e.target.classList.contains("arrow")) {
+            currentTextIndex++;
+            if (currentTextIndex < texts.length) {
+              updateText();
+            }
+          }
+        });
+    
+        updateText(); // Start met de eerste tekst
+        
+      </script>
+    </div>
+
     <script src="./scripts/script.js"></script>
 </body>
 </html>
+
+

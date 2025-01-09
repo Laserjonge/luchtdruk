@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoe werkt luchtdruk?</title>
+    <!-- Link naar favicon -->
+    <link rel="icon" type="image/png" href="images/ball-favicon.png">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+
+    <div id="background">
+        <img src="images/background.jpg" alt="">
+    </div>
+
+    <div id="overlay"></div>
+
+    <ol>
+        <li>400 KM</li><li>106 KM</li><li>39 KM</li><li>11 KM</li><li>9 KM</li>
+        <li>6 KM</li><li>1 KM</li><li>800 M</li><li>300 M</li><li>70 M</li><li>0</li>
+    </ol>
+    <div id="display">400 KM</div>
+    
+    <div class="image-wrapper">
+        <!-- Eerste meter -->
+        <div class="meter-container">
+            <img src="images/hoogte-meter.svg" alt="Barometer meet omgevingsdruk" class="meter-image hover1">
+            <img src="images/hoogte-meter-pijl.svg" alt="pijl 1" class="meter-pointer" id="first-rotate">
+            <div id="pressure-display" class="display-non">1.013 Bar</div>
+        </div>
+    
+        <!-- Tweede meter -->
+        <div class="meter-container">
+            <img src="images/druk-meter.svg" alt="Manometer meet de druk in de bal" class="meter-image hover2">
+            <img src="images/druk-meter-pijl.svg" alt="pijl 2" class="meter-pointer" id="second-rotate">
+            <div id="ball-pressure-display" class="display-non">0.0 Bar</div>
+        </div>
+    
+        <!-- Derde afbeelding -->
+        <div class="image-container">
+            <img src="images/noodknop-04.svg" alt="emergency" class="emergency-image">
+        </div>
+    </div>
+    
+    <div id="center-image-container">
+        <img src="images/Bal_transparant.png" alt="Midden afbeelding">
+    </div>
+
+    <div id="video-overlay" style="position: fixed; top: 4%; left: 50%; transform: translateX(-50%); width: 70%; height: 70%; z-index: 1000; display: none;">
+        <video id="video" width="100%" height="auto" controls>
+            <source src="images/cutteryt.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <!-- Help-knop -->
+    <a href="index.html" class="help-btn" title="Ga naar zero-state pagina">?</a>
+
+    <script src="./scripts/script.js"></script>
+</body>
+</html>
