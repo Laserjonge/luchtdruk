@@ -11,7 +11,7 @@
 <body>
 
     <div id="background">
-        <img src="images/background.png" alt="">
+        <img src="images/background.jpg" alt="">
     </div>
 
     <div id="overlay"></div>
@@ -43,18 +43,19 @@
         </div>
     </div>
     
-        
-        <!-- Derde afbeelding -->
-        <div class="image-container" class="meter-image" alt="hover3">
-            <img src="images/noodknop-04.svg" alt="emergency" class="emergency-image">
-        </div>
-    </div>
-    
-
-    <!-- Afbeelding in het midden van het scherm -->
     <div id="center-image-container">
         <img src="images/Bal_transparant.png" alt="Midden afbeelding">
     </div>
+
+    <div id="video-overlay" style="position: fixed; top: 4%; left: 50%; transform: translateX(-50%); width: 70%; height: 70%; z-index: 1000; display: none;">
+        <video id="video" width="100%" height="auto" controls>
+            <source src="../images/cutteryt.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <!-- Help-knop -->
+    <a href="zero-state.html" class="help-btn" title="Ga naar zero-state pagina">?</a>
 
     <script src="./scripts/script.js"></script>
 </body>

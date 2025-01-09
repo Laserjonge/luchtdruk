@@ -147,6 +147,11 @@ function showDisplaysIfSecondPijlPaused() {
 
 // Eventlistener voor klikken
 document.body.addEventListener("click", () => {
+    // Controleer of je niet op de pagina bent waar de functie niet moet werken
+    if (!window.location.pathname.includes("index.html")) {
+        return; // Stop de functie als je op de specifieke pagina bent
+    }
+
     clickCount++;
     if (clickCount === 1) {
         // Eerste klik: stop animatie van de eerste pijl
@@ -170,6 +175,7 @@ document.body.addEventListener("click", () => {
         showDisplaysIfSecondPijlPaused();
     }
 });
+
 
 
 
@@ -264,7 +270,11 @@ function showPressureAlert() {
     }, 2000); // Toon na 2 seconden vertraging
 }
 
-// Functie om de baldruk te berekenen en de alert te tonen bij 5.0 bar
+// Verkrijg de video-overlay div en het video-element
+const videoOverlay = document.getElementById("video-overlay");
+const video = document.getElementById("video");
+
+// Pas de functie voor baldrukberekening aan
 function calculateBallPressure(envPressure) {
     const constantFactor = 0.2;  // Constante druktoename factor
     const additionalPressure = constantFactor / envPressure;  // Extra druk op basis van omgevingsdruk
@@ -272,16 +282,20 @@ function calculateBallPressure(envPressure) {
     const ballPressure = Math.min(totalPressure, 5.0);  // Limiteer tot maximaal 5.0 bar
 
     // Controleer of 5.0 bar is bereikt
-    if (ballPressure >= 5.0) {
-        console.log("5.0 Bar bereikt! Melding wordt getoond...");
-        // Wacht 2 seconden en open de link in een nieuw tabblad
+    if (ballPressure >= 5.0 && ballPressure < 5.0 + 0.1) {  // Zorg ervoor dat de waarde echt 5.0 is
+        console.log("5.0 Bar bereikt! Video wordt getoond na 1 seconde...");
+
+        // Maak de video-overlay zichtbaar na 1 seconde
         setTimeout(() => {
-            window.open("https://youtu.be/ui9gs-88kY0?si=8AGMWYYGtH44KDGF&t=87", "_blank");
-        }, 2000); // 2000 ms = 2 seconden vertraging
+            videoOverlay.style.display = "block";  // Maak de overlay zichtbaar
+            video.play();  // Start de video pas nadat de overlay zichtbaar is
+        }, 1000); // 1 seconde vertraging
     }
 
     return ballPressure;
 }
+
+
 
 // Pas de displays bij
 function updateDisplay() {
@@ -318,3 +332,4 @@ function updateDisplay() {
     const ballPressure = calculateBallPressure(envPressure);
     ballPressureDisplay.textContent = `${ballPressure.toFixed(1)} bar`;
 }
+

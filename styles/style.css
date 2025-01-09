@@ -150,8 +150,8 @@ ol, li {
 
 .meter-container {
     position: relative; /* Container voor de meter en pijl */
-    width: 200px;       /* Vergroot de afmetingen */
-    height: 400px;      /* Houd rekening met grotere afbeeldingen */
+    width: 200px;
+    height: 400px;
 }
 
 .meter-image {
@@ -327,3 +327,119 @@ body {
     pointer-events: none; /* Zorg ervoor dat de tooltip geen interactie blokkeert */
 }
 
+/* Help-knop styling */
+.help-btn {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: #4682B4; /* Donkerder blauw */
+    color: white;
+    font-family: 'Arial', sans-serif; /* Sans-serif vetgedrukt */
+    font-size: 1.2rem; /* Kleinere tekst */
+    font-weight: bold;
+    border: none;
+    border-radius: 6px; /* Iets subtielere hoekradius */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Zorgt ervoor dat de knop boven andere elementen verschijnt */
+}
+
+.help-btn:hover {
+    background-color: #4169E1; /* Iets helderder blauw bij hover */
+}
+
+
+
+/* ZERO INDEX */
+.zero-body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    overflow: hidden;
+  }
+
+  /* De overlay die de pagina bedekt */
+  #overlay-zero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Zwarte overlay met 80% transparantie */
+    z-index: 9999;
+  }
+
+  /* Slider container */
+  #slider-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%; /* 50% van de breedte */
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10000;
+    height: 300px; /* Grotere hoogte voor extra ruimte voor de knoppen */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Zorg ervoor dat de knoppen onderaan staan */
+    background-color: transparent; /* Transparante achtergrond voor de tekst */
+  }
+
+  #text-container {
+    margin: 0;
+    transition: transform 0.5s ease;
+  }
+
+  #button-container {
+    margin-top: 10px; /* Knop iets omhoog geplaatst */
+  }
+
+  /* Knoppen voor 'Nu spelen!' */
+  button {
+    background-color: #4CAF50; /* Groene achtergrond */
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049; /* Donkergroene hover effect */
+  }
+
+  /* Pijltjes voor navigatie */
+  .arrow {
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    top: 50%;
+    z-index: 10001;
+    transition: opacity 0.3s ease;
+  }
+
+  .arrow-left {
+    left: 10%;
+  }
+
+  .arrow-right {
+    right: 10%;
+  }
+
+  .arrow.disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
