@@ -148,7 +148,7 @@ function showDisplaysIfSecondPijlPaused() {
 // Eventlistener voor klikken
 document.body.addEventListener("click", () => {
     // Controleer of je niet op de pagina bent waar de functie niet moet werken
-    if (!window.location.pathname.includes("index.html")) {
+    if (!window.location.pathname.includes("game.html")) {
         return; // Stop de functie als je op de specifieke pagina bent
     }
 
