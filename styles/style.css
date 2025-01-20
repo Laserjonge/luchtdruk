@@ -179,6 +179,7 @@ ol, li {
     width: 40%;          /* Vul de container volledig */
     height: 40%;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Lichte schaduw */
+    cursor: pointer;
 }
 
 
@@ -299,6 +300,7 @@ body {
 .hover1, .hover2, .hover3 {
     position: relative;  /* Houdt de elementen in hun eigen plaats */
     display: inline-block;  /* Zorg ervoor dat de afbeeldingen zich gedragen als inline-block elementen */
+    cursor: pointer;
 }
 
 /* Tooltip styling */
@@ -443,3 +445,21 @@ body {
     opacity: 0;
     pointer-events: none;
   }
+
+
+  #center-image-container img {
+    position: absolute;
+    z-index: 10; /* Voorkomt dat overlay eroverheen komt */
+    animation: moveBall 3s ease forwards; /* Zorgt dat de animatie stopt op eindpositie */
+}
+
+@keyframes moveBall {
+    from {
+        top: 50%;
+        left: 50%;
+    }
+    to {
+        top: 10%;
+        left: 30%;
+    }
+}

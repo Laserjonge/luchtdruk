@@ -333,3 +333,38 @@ function updateDisplay() {
     ballPressureDisplay.textContent = `${ballPressure.toFixed(1)} bar`;
 }
 
+// Functie om de positie van de bal op te slaan
+function saveBallPosition(position) {
+    localStorage.setItem('ballPosition', JSON.stringify(position));
+}
+
+// Functie om de opgeslagen balpositie op te halen
+function loadBallPosition() {
+    const savedPosition = localStorage.getItem('ballPosition');
+    return savedPosition ? JSON.parse(savedPosition) : null;
+}
+
+// Plaats de bal bij het laden van de pagina
+window.onload = () => {
+    const ball = document.querySelector('#center-image-container img');
+    const savedPosition = loadBallPosition();
+
+    if (savedPosition) {
+        ball.style.top = savedPosition.top;
+        ball.style.left = savedPosition.left;
+    }
+};
+
+// Update de positie en sla op wanneer de bal beweegt
+document.addEventListener('mousemove', (e) => {
+    const ball = document.querySelector('#center-image-container img');
+    ball.style.top = `${e.clientY}px`;
+    ball.style.left = `${e.clientX}px`;
+
+    saveBallPosition({ top: `${e.clientY}px`, left: `${e.clientX}px` });
+});
+
+document.getElementById('reload-button').addEventListener('click', () => {
+    console.log('Pagina wordt herladen met bal op positie: ', loadBallPosition());
+    location.reload();
+});
